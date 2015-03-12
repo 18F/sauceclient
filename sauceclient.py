@@ -18,7 +18,7 @@
 
 
 import base64
-import httplib
+from http.client import HTTPSConnection
 import json
 
 
@@ -47,7 +47,7 @@ class SauceClient(object):
         return headers
 
     def request(self, method, url, body=None):
-        connection = httplib.HTTPSConnection('saucelabs.com')
+        connection = HTTPSConnection('saucelabs.com')
         connection.request(method, url, body, headers=self.headers)
         response = connection.getresponse()
         json_data = response.read()
